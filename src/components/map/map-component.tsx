@@ -24,8 +24,8 @@ export default function MapComponent() {
   if (!mounted) return null;
 
   // Replace with your actual GeoServer URL and layer
-  const geoServerUrl = "http://your-geoserver-url/geoserver/wms";
-  const geoServerLayer = "your_workspace:your_layer";
+  const geoServerUrl = "http://localhost:8080/geoserver/wms";
+  const geoServerLayer = "radar:Fase8Norte";
 
   return (
     <Card className="w-full h-[600px]">

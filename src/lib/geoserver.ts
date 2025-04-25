@@ -1,7 +1,7 @@
 // src/lib/geoserver.ts
 
 // Base GeoServer URL
-const GEOSERVER_URL = "http://your-geoserver-url/geoserver";
+const GEOSERVER_URL = "http://localhost:8080/geoserver";
 
 // Function to get WMS URL for a specific workspace and layer
 export function getWmsUrl(_workspace: string, _layer: string) {
@@ -14,8 +14,9 @@ export async function getAvailableLayers() {
     // You'll need to implement proper authentication if required
     const response = await fetch(`${GEOSERVER_URL}/rest/layers.json`, {
       headers: {
-        // Add basic auth if needed
-        // "Authorization": "Basic " + btoa("username:password")
+        // Add basic auth
+        // user name is admin and password is geoserver
+        Authorization: "Basic " + btoa("admin:geoserver"),
       },
     });
 
@@ -24,6 +25,9 @@ export async function getAvailableLayers() {
     }
 
     const data = await response.json();
+
+    console.log("Available layers:", data);
+
     return data.layers.layer || [];
   } catch (error) {
     console.error("Error fetching GeoServer layers:", error);

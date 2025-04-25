@@ -16,7 +16,7 @@ const DEFAULT_ZOOM = 2;
 export default function MapComponent() {
   const [mounted, setMounted] = useState(false);
   const [showGeoServer, setShowGeoServer] = useState(true);
-  
+
   // This prevents hydration errors with react-leaflet
   useEffect(() => {
     setMounted(true);
@@ -33,8 +33,8 @@ export default function MapComponent() {
       <CardHeader>
         <CardTitle>GeoServer Map Integration</CardTitle>
         <div className="flex items-center space-x-2">
-          <Switch 
-            id="geoserver-layer" 
+          <Switch
+            id="geoserver-layer"
             checked={showGeoServer}
             onCheckedChange={setShowGeoServer}
           />
@@ -52,7 +52,7 @@ export default function MapComponent() {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          
+
           {/* GeoServer WMS layer */}
           {showGeoServer && (
             <WMSTileLayer

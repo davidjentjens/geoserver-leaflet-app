@@ -12,20 +12,17 @@ export function getWmsUrl(_workspace: string, _layer: string) {
 export async function getAvailableLayers() {
   try {
     // You'll need to implement proper authentication if required
-    const response = await fetch(
-      `${GEOSERVER_URL}/rest/layers.json`, 
-      {
-        headers: {
-          // Add basic auth if needed
-          // "Authorization": "Basic " + btoa("username:password")
-        }
-      }
-    );
-    
+    const response = await fetch(`${GEOSERVER_URL}/rest/layers.json`, {
+      headers: {
+        // Add basic auth if needed
+        // "Authorization": "Basic " + btoa("username:password")
+      },
+    });
+
     if (!response.ok) {
-      throw new Error('Failed to fetch layers');
+      throw new Error("Failed to fetch layers");
     }
-    
+
     const data = await response.json();
     return data.layers.layer || [];
   } catch (error) {
@@ -36,13 +33,13 @@ export async function getAvailableLayers() {
 
 // Function to get feature info from a layer
 export async function getFeatureInfo(
-  workspace: string, 
-  layer: string, 
-  bbox: string, 
-  width: number, 
-  height: number, 
-  x: number, 
-  y: number
+  workspace: string,
+  layer: string,
+  bbox: string,
+  width: number,
+  height: number,
+  x: number,
+  y: number,
 ) {
   const url = new URL(`${GEOSERVER_URL}/wms`);
   url.searchParams.append("SERVICE", "WMS");
@@ -57,11 +54,11 @@ export async function getFeatureInfo(
   url.searchParams.append("Y", y.toString());
   url.searchParams.append("INFO_FORMAT", "application/json");
   url.searchParams.append("FEATURE_COUNT", "50");
-  
+
   try {
     const response = await fetch(url.toString());
     if (!response.ok) {
-      throw new Error('Failed to get feature info');
+      throw new Error("Failed to get feature info");
     }
     return await response.json();
   } catch (error) {

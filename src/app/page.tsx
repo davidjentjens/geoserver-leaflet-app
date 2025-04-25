@@ -1,5 +1,10 @@
-// src/app/page.tsx
-import MapComponent from "@/components/map/map-component";
+"use client";
+import dynamic from "next/dynamic";
+
+const MapComponent = dynamic(() => import("@/components/map/map-component"), {
+  ssr: false,
+  loading: () => <p>Loading...</p>,
+});
 
 export default function Home() {
   return (

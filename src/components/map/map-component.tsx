@@ -2,12 +2,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
 import { MapContainer, TileLayer, WMSTileLayer } from "react-leaflet";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 
 // Default map center coordinates (adjust as needed)
 const DEFAULT_CENTER: [number, number] = [0, 0];

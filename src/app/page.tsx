@@ -1,20 +1,28 @@
+// src/app/page.tsx
 "use client";
 import dynamic from "next/dynamic";
 
+import { MainLayout } from "@/components/layout/main-layout";
+import { LayerProvider } from "@/contexts/layer-context";
+
+// Dynamic import for the map component to prevent SSR issues
 const MapComponent = dynamic(() => import("@/components/map/map-component"), {
   ssr: false,
-  loading: () => <p>Loading...</p>,
+  loading: () => (
+    <div className="flex items-center justify-center h-full w-full">
+      <div className="animate-pulse text-lg">Loading Map...</div>
+    </div>
+  ),
 });
 
 export default function Home() {
   return (
-    <main className="min-h-screen p-8">
-      <div className="container mx-auto">
-        <h1 className="text-3xl font-bold mb-6">
-          GeoServer Leaflet Integration
-        </h1>
-        <MapComponent />
-      </div>
-    </main>
+    <LayerProvider>
+      <MainLayout>
+        <div className="h-full w-full">
+          <MapComponent />
+        </div>
+      </MainLayout>
+    </LayerProvider>
   );
 }

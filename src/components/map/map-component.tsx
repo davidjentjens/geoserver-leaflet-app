@@ -5,8 +5,8 @@ import { ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 
-import { Button } from "@/app/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/app/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -14,9 +14,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/app/components/ui/dropdown-menu";
-import { Label } from "@/app/components/ui/label";
-import { Switch } from "@/app/components/ui/switch";
+} from "@/components/ui/dropdown-menu";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import { GEOSERVER_URL, getAvailableLayers } from "@/lib/geoserver";
 
 import WMSLayer from "./wms-layer";

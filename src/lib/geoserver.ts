@@ -1,34 +1,37 @@
-// src/lib/geoserver.ts
-
-// Base GeoServer URL
-const GEOSERVER_URL = "http://localhost:8080/geoserver";
+// Updated geoserver.ts
+export const GEOSERVER_URL = "http://localhost:8080/geoserver";
+export const GEOSERVER_REST_URL = `${GEOSERVER_URL}/rest`;
+export const API_PROXY_URL = "/api/geoserver"; // Your Next.js API route
 
 // Function to get WMS URL for a specific workspace and layer
 export function getWmsUrl(_workspace: string, _layer: string) {
-  return `${GEOSERVER_URL}/wms`;
+  // Keep the direct URL for WMS as it's used for the map tiles
+  return `${GEOSERVER_REST_URL}/wms`;
 }
 
 // Function to fetch available layers from GeoServer
 export async function getAvailableLayers() {
   try {
-    // You'll need to implement proper authentication if required
-    const response = await fetch(`${GEOSERVER_URL}/rest/layers.json`, {
-      headers: {
-        // Add basic auth
-        // user name is admin and password is geoserver
-        Authorization: "Basic " + btoa("admin:geoserver"),
-      },
-    });
+    // Use the API route instead of direct call
+    const response = await fetch(`${API_PROXY_URL}?endpoint=layers.json`);
 
     if (!response.ok) {
       throw new Error("Failed to fetch layers");
     }
 
     const data = await response.json();
+    console.log("Parsed GeoServer layers data:", data);
 
-    console.log("Available layers:", data);
+    // Process the layers data to return the expected format
+    if (data.layers && data.layers.layer) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return data.layers.layer.map((layer: any) => ({
+        name: layer.name,
+        href: layer.href,
+      }));
+    }
 
-    return data.layers.layer || [];
+    return [];
   } catch (error) {
     console.error("Error fetching GeoServer layers:", error);
     return [];
@@ -45,22 +48,28 @@ export async function getFeatureInfo(
   x: number,
   y: number,
 ) {
-  const url = new URL(`${GEOSERVER_URL}/wms`);
-  url.searchParams.append("SERVICE", "WMS");
-  url.searchParams.append("VERSION", "1.1.1");
-  url.searchParams.append("REQUEST", "GetFeatureInfo");
-  url.searchParams.append("LAYERS", `${workspace}:${layer}`);
-  url.searchParams.append("QUERY_LAYERS", `${workspace}:${layer}`);
-  url.searchParams.append("BBOX", bbox);
-  url.searchParams.append("WIDTH", width.toString());
-  url.searchParams.append("HEIGHT", height.toString());
-  url.searchParams.append("X", x.toString());
-  url.searchParams.append("Y", y.toString());
-  url.searchParams.append("INFO_FORMAT", "application/json");
-  url.searchParams.append("FEATURE_COUNT", "50");
+  // For GetFeatureInfo requests, you may want to create another API endpoint
+  // or modify the existing one to handle different types of requests
+  const params = new URLSearchParams({
+    SERVICE: "WMS",
+    VERSION: "1.1.1",
+    REQUEST: "GetFeatureInfo",
+    LAYERS: `${workspace}:${layer}`,
+    QUERY_LAYERS: `${workspace}:${layer}`,
+    BBOX: bbox,
+    WIDTH: width.toString(),
+    HEIGHT: height.toString(),
+    X: x.toString(),
+    Y: y.toString(),
+    INFO_FORMAT: "application/json",
+    FEATURE_COUNT: "50",
+  });
+
+  // For WMS requests, continue using the direct URL as these are accessed by the map component
+  const url = `${GEOSERVER_REST_URL}/wms?${params.toString()}`;
 
   try {
-    const response = await fetch(url.toString());
+    const response = await fetch(url);
     if (!response.ok) {
       throw new Error("Failed to get feature info");
     }

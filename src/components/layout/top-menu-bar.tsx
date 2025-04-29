@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/menubar";
 import { useLayerContext } from "@/contexts/layer-context";
 
+import { SidebarTrigger } from "../ui/sidebar";
+
 export function TopMenubar() {
   const {
     availableLayers,
@@ -29,7 +31,7 @@ export function TopMenubar() {
   return (
     <Menubar className="rounded-none border-b border-none px-2 lg:px-4">
       <MenubarMenu>
-        <MenubarTrigger className="font-bold">GeoServer Viewer</MenubarTrigger>
+        <SidebarTrigger />
       </MenubarMenu>
 
       <MenubarMenu>

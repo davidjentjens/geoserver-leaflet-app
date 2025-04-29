@@ -1,8 +1,7 @@
 // src/components/layout/MainLayout.tsx
 import { ReactNode } from "react";
 
-import { Separator } from "@/components/ui/separator";
-
+import { SidebarProvider } from "../ui/sidebar";
 import { LayersPanel } from "./layers-panel";
 import { TopMenubar } from "./top-menu-bar";
 
@@ -13,14 +12,13 @@ interface MainLayoutProps {
 export function MainLayout({ children }: MainLayoutProps) {
   return (
     <div className="flex flex-col h-screen">
-      <TopMenubar />
-      <div className="flex-1 flex overflow-hidden">
-        <aside className="w-64 border-r">
-          <LayersPanel />
-        </aside>
-        <Separator orientation="vertical" />
-        <main className="flex-1 overflow-hidden">{children}</main>
-      </div>
+      <SidebarProvider>
+        <LayersPanel />
+        <main className="flex-1 overflow-hidden">
+          <TopMenubar />
+          {children}
+        </main>
+      </SidebarProvider>
     </div>
   );
 }

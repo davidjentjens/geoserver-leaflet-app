@@ -8,6 +8,8 @@ import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { useLayerContext } from "@/contexts/layer-context";
 
+import { Sidebar, SidebarHeader } from "../ui/sidebar";
+
 export function LayersPanel() {
   const {
     availableLayers,
@@ -21,8 +23,8 @@ export function LayersPanel() {
   } = useLayerContext();
 
   return (
-    <div className="space-y-4 py-4">
-      <div className="px-4 py-2">
+    <Sidebar>
+      <SidebarHeader>
         <h2 className="mb-2 px-2 text-lg font-semibold tracking-tight">
           GeoServer Layers
         </h2>
@@ -46,7 +48,7 @@ export function LayersPanel() {
             </Label>
           </div>
         </div>
-      </div>
+      </SidebarHeader>
       <Separator />
       <div className="px-4 py-2">
         <div className="flex items-center justify-between mb-2">
@@ -107,6 +109,6 @@ export function LayersPanel() {
           )}
         </ScrollArea>
       </div>
-    </div>
+    </Sidebar>
   );
 }

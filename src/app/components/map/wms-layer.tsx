@@ -1,4 +1,4 @@
-// src/components/map/WMSLayer.tsx
+// src/components/map/wms-layer.tsx
 import L from "leaflet";
 import { useEffect, useRef } from "react";
 import { useMap } from "react-leaflet";
@@ -60,9 +60,6 @@ export default function WMSLayer({
     // Add to map and store reference
     newLayer.addTo(map);
     layerRef.current = newLayer;
-
-    // Debug info
-    console.log(`WMS Layer updated: ${layerName}`);
 
     // Cleanup function to remove layer when component unmounts or dependencies change
     return () => {

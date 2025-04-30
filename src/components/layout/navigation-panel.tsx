@@ -6,6 +6,7 @@ import {
   Paintbrush,
   Settings,
   Shapes,
+  TestTube2,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -74,7 +75,10 @@ const items: SidebarMenuItemProps[] = [
 export function NavigationPanel() {
   return (
     <Sidebar>
-      <SidebarHeader>GeoServer Testing</SidebarHeader>
+      <SidebarHeader className="flex items-center justify-center flex-row p-4 gap-3">
+        <TestTube2 className="text-gray-500" />
+        GeoServer Testing Env.
+      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>

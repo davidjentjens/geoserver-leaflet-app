@@ -7,6 +7,7 @@ import { MapContainer, TileLayer } from "react-leaflet";
 import { useLayerContext } from "@/contexts/layer-context";
 import { GEOSERVER_URL } from "@/lib/geoserver";
 
+import { TopMenubar } from "../layout/top-menu-bar";
 import WMSLayer from "./wms-layer";
 
 // Default map center coordinates
@@ -26,11 +27,13 @@ export default function MapComponent() {
 
   return (
     <div className="w-full h-full">
+      <TopMenubar className="absolute w-full" />
       <MapContainer
         center={DEFAULT_CENTER}
         zoom={DEFAULT_ZOOM}
         style={{ height: "100%", width: "100%" }}
-        className="z-10" // Ensure map has a lower z-index
+        className="z-10"
+        zoomControl={false}
       >
         {/* Base map layer */}
         <TileLayer

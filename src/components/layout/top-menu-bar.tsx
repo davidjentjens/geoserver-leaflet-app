@@ -1,5 +1,5 @@
 // src/components/layout/TopMenubar.tsx
-import { Eye, EyeOff, Info, Layers, Map, Settings } from "lucide-react";
+import { Eye, EyeOff, Info, Layers, Settings } from "lucide-react";
 
 import {
   Menubar,
@@ -14,10 +14,15 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar";
 import { useLayerContext } from "@/contexts/layer-context";
+import { cn } from "@/lib/utils";
 
 import { SidebarTrigger } from "../ui/sidebar";
 
-export function TopMenubar() {
+interface TopMenubarProps {
+  className?: string;
+}
+
+export function TopMenubar({ className }: TopMenubarProps) {
   const {
     availableLayers,
     selectedLayers,
@@ -29,26 +34,14 @@ export function TopMenubar() {
   } = useLayerContext();
 
   return (
-    <Menubar className="rounded-none border-b border-none px-2 lg:px-4">
+    <Menubar
+      className={cn(
+        `rounded-none border-b border-none px-2 lg:px-4 z-50`,
+        className,
+      )}
+    >
       <MenubarMenu>
         <SidebarTrigger />
-      </MenubarMenu>
-
-      <MenubarMenu>
-        <MenubarTrigger>
-          <Map className="mr-2 h-4 w-4" />
-          Map
-        </MenubarTrigger>
-        <MenubarContent>
-          <MenubarItem>
-            Export Map <span className="text-xs ml-auto">⌘+E</span>
-          </MenubarItem>
-          <MenubarItem>
-            Print <span className="text-xs ml-auto">⌘+P</span>
-          </MenubarItem>
-          <MenubarSeparator />
-          <MenubarItem>Reset View</MenubarItem>
-        </MenubarContent>
       </MenubarMenu>
 
       <MenubarMenu>

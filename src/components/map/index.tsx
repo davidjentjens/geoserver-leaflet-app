@@ -26,7 +26,7 @@ export default function MapComponent() {
   if (!mounted) return null;
 
   return (
-    <div className="w-full h-full">
+    <>
       <TopMenubar className="-z-50" />
       <MapContainer
         center={DEFAULT_CENTER}
@@ -55,6 +55,6 @@ export default function MapComponent() {
             />
           ))}
       </MapContainer>
-    </div>
+    </>
   );
 }

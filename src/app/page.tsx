@@ -2,9 +2,6 @@
 "use client";
 import dynamic from "next/dynamic";
 
-import { MainLayout } from "@/components/layout/main-layout";
-import { LayerProvider } from "@/contexts/layer-context";
-
 // Dynamic import for the map component to prevent SSR issues
 const MapComponent = dynamic(() => import("@/components/map"), {
   ssr: false,
@@ -17,12 +14,8 @@ const MapComponent = dynamic(() => import("@/components/map"), {
 
 export default function Home() {
   return (
-    <LayerProvider>
-      <MainLayout>
-        <div className="h-full w-full">
-          <MapComponent />
-        </div>
-      </MainLayout>
-    </LayerProvider>
+    <div className="h-full w-full">
+      <MapComponent />
+    </div>
   );
 }

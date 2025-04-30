@@ -1,4 +1,6 @@
 // src/contexts/LayerContext.tsx
+"use client";
+
 import {
   createContext,
   ReactNode,

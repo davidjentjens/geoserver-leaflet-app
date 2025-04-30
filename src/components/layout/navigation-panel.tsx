@@ -56,18 +56,18 @@ const items: SidebarMenuItemProps[] = [
     title: "Analysis",
     icon: Map,
     subItems: [
-      { title: "Maps", url: "#maps", icon: Map },
-      { title: "Layers", url: "#layers", icon: Layers },
-      { title: "Polygons", url: "#polygons", icon: Shapes },
+      { title: "Maps", url: "/", icon: Map },
+      { title: "Layers", url: "/layers", icon: Layers },
+      { title: "Polygons", url: "/polygons", icon: Shapes },
     ],
   },
   {
     title: "Settings",
     icon: Settings,
     subItems: [
-      { title: "General", url: "#general", icon: Settings },
-      { title: "Appearance", url: "#appearance", icon: Paintbrush },
-      { title: "Advanced", url: "#advanced" },
+      { title: "General", url: "/general", icon: Settings },
+      { title: "Appearance", url: "/appearance", icon: Paintbrush },
+      { title: "Advanced", url: "/advanced" },
     ],
   },
 ];

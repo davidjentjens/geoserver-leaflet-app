@@ -27,11 +27,11 @@ export default function MapComponent() {
 
   return (
     <div className="w-full h-full">
-      <TopMenubar className="absolute w-full" />
+      <TopMenubar className="-z-50" />
       <MapContainer
         center={DEFAULT_CENTER}
         zoom={DEFAULT_ZOOM}
-        style={{ height: "100%", width: "100%" }}
+        style={{ height: "calc(100% - 36px)", width: "100%" }}
         className="z-10"
         zoomControl={false}
       >

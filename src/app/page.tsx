@@ -6,7 +6,7 @@ import { MainLayout } from "@/components/layout/main-layout";
 import { LayerProvider } from "@/contexts/layer-context";
 
 // Dynamic import for the map component to prevent SSR issues
-const MapComponent = dynamic(() => import("@/components/map/map-component"), {
+const MapComponent = dynamic(() => import("@/components/map"), {
   ssr: false,
   loading: () => (
     <div className="flex items-center justify-center h-full w-full">

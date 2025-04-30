@@ -7,7 +7,7 @@ import { MapContainer, TileLayer } from "react-leaflet";
 import { useLayerContext } from "@/contexts/layer-context";
 import { GEOSERVER_URL } from "@/lib/geoserver";
 
-import { TopMenubar } from "../layout/top-menu-bar";
+import { TopMenubar } from "./top-menu-bar";
 import WMSLayer from "./wms-layer";
 
 // Default map center coordinates

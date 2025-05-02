@@ -1,5 +1,5 @@
 // src/components/layout/TopMenubar.tsx
-import { Eye, EyeOff, Info, Layers, Settings } from "lucide-react";
+import { Eye, EyeOff, Info, Layers } from "lucide-react";
 
 import {
   Menubar,

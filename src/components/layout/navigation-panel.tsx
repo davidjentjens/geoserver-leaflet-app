@@ -5,7 +5,6 @@ import {
   Map,
   Paintbrush,
   Settings,
-  Shapes,
   TestTube2,
 } from "lucide-react";
 import Link from "next/link";
@@ -58,7 +57,6 @@ const items: SidebarMenuItemProps[] = [
     subItems: [
       { title: "Maps", url: "/", icon: Map },
       { title: "Layers", url: "/layers", icon: Layers },
-      { title: "Polygons", url: "/polygons", icon: Shapes },
     ],
   },
   {
@@ -75,9 +73,9 @@ const items: SidebarMenuItemProps[] = [
 export function NavigationPanel() {
   return (
     <Sidebar>
-      <SidebarHeader className="flex items-center justify-center flex-row p-4 gap-3">
+      <SidebarHeader className="flex items-center justify-start flex-row p-4 gap-3">
         <TestTube2 className="text-gray-500" />
-        GeoServer Testing Env.
+        Radar Testing Env.
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>

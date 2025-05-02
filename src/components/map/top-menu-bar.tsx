@@ -101,10 +101,6 @@ export function TopMenubar({ className }: TopMenubarProps) {
       </MenubarMenu>
 
       <MenubarMenu>
-        <MenubarTrigger>
-          <Settings className="mr-2 h-4 w-4" />
-          Settings
-        </MenubarTrigger>
         <MenubarContent>
           <MenubarItem>Base Map</MenubarItem>
           <MenubarItem>Projection</MenubarItem>

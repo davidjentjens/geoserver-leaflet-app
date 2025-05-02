@@ -20,7 +20,6 @@ export async function getAvailableLayers() {
     }
 
     const data = await response.json();
-    console.log("Parsed GeoServer layers data:", data);
 
     // Process the layers data to return the expected format
     if (data.layers && data.layers.layer) {

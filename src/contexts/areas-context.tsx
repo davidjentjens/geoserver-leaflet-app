@@ -27,6 +27,7 @@ interface AreasContextType {
   isEditing: boolean;
   temporaryGeometry: Feature | undefined;
   showAreas: boolean;
+  enableEditInterface: boolean;
 
   // Methods
   addArea: (name: string, description: string, geometry: Feature) => void;
@@ -39,6 +40,7 @@ interface AreasContextType {
   setTemporaryGeometry: (geometry: Feature | undefined) => void;
   getAreasAsGeoJSON: () => FeatureCollection;
   setShowAreas: (show: boolean) => void;
+  setEnableEditInterface: (enable: boolean) => void;
 }
 
 const AreasContext = createContext<AreasContextType | undefined>(undefined);
@@ -47,7 +49,9 @@ const LOCAL_STORAGE_KEY = "geoserver-areas-of-interest";
 
 export function AreasProvider({ children }: { children: ReactNode }) {
   const [areas, setAreas] = useState<AreaOfInterest[]>([]);
-  const [showAreas, setShowAreas] = useState<boolean>(true);
+  const [showAreas, setShowAreas] = useState<boolean>(false);
+  const [enableEditInterface, setEnableEditInterface] =
+    useState<boolean>(false);
   const [selectedArea, setSelectedArea] = useState<AreaOfInterest | undefined>(
     undefined,
   );
@@ -73,6 +77,14 @@ export function AreasProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(areas));
   }, [areas]);
+
+  // Add a useEffect to handle the case when the user de-selects an area
+  useEffect(() => {
+    if (!selectedArea) {
+      setIsEditing(false);
+      setIsModalOpen(false);
+    }
+  }, [selectedArea]);
 
   // Add a new area
   const addArea = (name: string, description: string, geometry: Feature) => {
@@ -176,6 +188,7 @@ export function AreasProvider({ children }: { children: ReactNode }) {
         isEditing,
         temporaryGeometry,
         showAreas,
+        enableEditInterface,
         addArea,
         updateArea,
         deleteArea,
@@ -186,6 +199,7 @@ export function AreasProvider({ children }: { children: ReactNode }) {
         setTemporaryGeometry,
         getAreasAsGeoJSON,
         setShowAreas,
+        setEnableEditInterface,
       }}
     >
       {children}

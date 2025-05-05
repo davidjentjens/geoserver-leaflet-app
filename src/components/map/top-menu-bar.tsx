@@ -1,5 +1,13 @@
 // src/components/layout/TopMenubar.tsx
-import { Eye, EyeOff, Info, Layers, MapPin, Trash } from "lucide-react";
+import {
+  Eye,
+  EyeOff,
+  Info,
+  Layers,
+  MapPin,
+  Pencil,
+  PencilOff,
+} from "lucide-react";
 
 import {
   Menubar,
@@ -34,7 +42,12 @@ export function TopMenubar({ className }: TopMenubarProps) {
     clearAllLayers,
   } = useLayerContext();
 
-  const { showAreas, setShowAreas } = useAreasContext();
+  const {
+    showAreas,
+    setShowAreas,
+    enableEditInterface,
+    setEnableEditInterface,
+  } = useAreasContext();
 
   return (
     <Menubar
@@ -50,7 +63,7 @@ export function TopMenubar({ className }: TopMenubarProps) {
       <MenubarMenu>
         <MenubarTrigger>
           <Layers className="mr-2 h-4 w-4" />
-          Layers
+          Radar Layers
         </MenubarTrigger>
         <MenubarContent>
           <MenubarCheckboxItem
@@ -113,17 +126,6 @@ export function TopMenubar({ className }: TopMenubarProps) {
 
       <MenubarMenu>
         <MenubarTrigger>
-          <Info className="mr-2 h-4 w-4" />
-          Help
-        </MenubarTrigger>
-        <MenubarContent>
-          <MenubarItem>Documentation</MenubarItem>
-          <MenubarItem>About</MenubarItem>
-        </MenubarContent>
-      </MenubarMenu>
-
-      <MenubarMenu>
-        <MenubarTrigger>
           <MapPin className="mr-2 h-4 w-4" />
           Areas of Interest
         </MenubarTrigger>
@@ -135,21 +137,44 @@ export function TopMenubar({ className }: TopMenubarProps) {
           >
             {showAreas ? (
               <span className="flex items-center">
-                <Eye className="mr-2 h-4 w-4" />
-                Show Areas
-              </span>
-            ) : (
-              <span className="flex items-center">
                 <EyeOff className="mr-2 h-4 w-4" />
                 Hide Areas
               </span>
+            ) : (
+              <span className="flex items-center">
+                <Eye className="mr-2 h-4 w-4" />
+                Show Areas
+              </span>
             )}
           </MenubarItem>
-          <MenubarSeparator />
-          <MenubarItem>
-            <Trash className="mr-2 h-4 w-4" />
-            Clear All Areas
+          <MenubarItem
+            onClick={() => {
+              setEnableEditInterface(!enableEditInterface);
+            }}
+          >
+            {!enableEditInterface ? (
+              <span className="flex items-center">
+                <Pencil className="mr-2 h-4 w-4" />
+                Enable Area Editing
+              </span>
+            ) : (
+              <span className="flex items-center">
+                <PencilOff className="mr-2 h-4 w-4" />
+                Disable Area Editing
+              </span>
+            )}
           </MenubarItem>
+        </MenubarContent>
+      </MenubarMenu>
+
+      <MenubarMenu>
+        <MenubarTrigger>
+          <Info className="mr-2 h-4 w-4" />
+          Help
+        </MenubarTrigger>
+        <MenubarContent>
+          <MenubarItem>Documentation</MenubarItem>
+          <MenubarItem>About</MenubarItem>
         </MenubarContent>
       </MenubarMenu>
     </Menubar>

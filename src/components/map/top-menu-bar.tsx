@@ -1,5 +1,5 @@
 // src/components/layout/TopMenubar.tsx
-import { Eye, EyeOff, Info, Layers } from "lucide-react";
+import { Eye, EyeOff, Info, Layers, MapPin, Trash } from "lucide-react";
 
 import {
   Menubar,
@@ -13,6 +13,7 @@ import {
   MenubarSubTrigger,
   MenubarTrigger,
 } from "@/components/ui/menubar";
+import { useAreasContext } from "@/contexts/areas-context";
 import { useLayerContext } from "@/contexts/layer-context";
 import { cn } from "@/lib/utils";
 
@@ -32,6 +33,8 @@ export function TopMenubar({ className }: TopMenubarProps) {
     selectAllLayers,
     clearAllLayers,
   } = useLayerContext();
+
+  const { showAreas, setShowAreas } = useAreasContext();
 
   return (
     <Menubar
@@ -116,6 +119,37 @@ export function TopMenubar({ className }: TopMenubarProps) {
         <MenubarContent>
           <MenubarItem>Documentation</MenubarItem>
           <MenubarItem>About</MenubarItem>
+        </MenubarContent>
+      </MenubarMenu>
+
+      <MenubarMenu>
+        <MenubarTrigger>
+          <MapPin className="mr-2 h-4 w-4" />
+          Areas of Interest
+        </MenubarTrigger>
+        <MenubarContent>
+          <MenubarItem
+            onClick={() => {
+              setShowAreas(!showAreas);
+            }}
+          >
+            {showAreas ? (
+              <span className="flex items-center">
+                <Eye className="mr-2 h-4 w-4" />
+                Show Areas
+              </span>
+            ) : (
+              <span className="flex items-center">
+                <EyeOff className="mr-2 h-4 w-4" />
+                Hide Areas
+              </span>
+            )}
+          </MenubarItem>
+          <MenubarSeparator />
+          <MenubarItem>
+            <Trash className="mr-2 h-4 w-4" />
+            Clear All Areas
+          </MenubarItem>
         </MenubarContent>
       </MenubarMenu>
     </Menubar>

@@ -1,5 +1,6 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
 
+import { AreasProvider } from "./areas-context";
 import { LayerProvider } from "./layer-context";
 
 export const UniversalProvider = ({
@@ -9,7 +10,9 @@ export const UniversalProvider = ({
 }) => {
   return (
     <LayerProvider>
-      <SidebarProvider>{children}</SidebarProvider>
+      <AreasProvider>
+        <SidebarProvider>{children}</SidebarProvider>
+      </AreasProvider>
     </LayerProvider>
   );
 };

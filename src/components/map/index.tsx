@@ -28,41 +28,6 @@ export default function MapComponent() {
     setMounted(true);
   }, []);
 
-  // Add click handler to deselect area when clicking outside the map
-  useEffect(() => {
-    // Only add the listener if we have a selected area
-    if (!selectedArea) return;
-
-    // Function to handle clicks outside the map
-    const handleOutsideClick = (e: MouseEvent) => {
-      // Check if the click is outside the map container
-      const mapContainer = document.querySelector(".leaflet-container");
-
-      // If we couldn't find the map container or if the click is outside it
-      // and not on a UI element related to areas (dialog, panels, etc.)
-      if (!mapContainer || !mapContainer.contains(e.target as Node)) {
-        // Make sure we're not clicking on the area dialog or related UI elements
-        const areaDialog = document.querySelector('[role="dialog"]');
-        const areasPanel = document.querySelector(".w-80.h-full.border-r");
-
-        if (
-          (!areaDialog || !areaDialog.contains(e.target as Node)) &&
-          (!areasPanel || !areasPanel.contains(e.target as Node))
-        ) {
-          selectArea(undefined);
-        }
-      }
-    };
-
-    // Add event listener to the document
-    document.addEventListener("mousedown", handleOutsideClick);
-
-    // Clean up
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    };
-  }, [selectedArea, selectArea]);
-
   if (!mounted) return null;
 
   return (

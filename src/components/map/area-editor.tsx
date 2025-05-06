@@ -188,7 +188,7 @@ export default function AreaEditor() {
             draw={{
               rectangle: false,
               polyline: false,
-              polygon: enableEditInterface,
+              polygon: enableEditInterface && selectedArea === undefined,
               circle: false,
               marker: false,
               circlemarker: false,

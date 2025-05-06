@@ -77,6 +77,18 @@ export default function MapComponent() {
             <ZoomControl position="bottomright" />
           </MapContainer>
 
+          {/* Selected Area Highlight */}
+          {selectedArea && (
+            <div className="absolute top-0 left-0 z-20 w-full h-full pointer-events-none">
+              <button
+                className={`m-2 p-3 flex gap-1.5 rounded-4xl shadow text-white ${enableEditInterface ? "bg-chart-1" : "bg-chart-5"}`}
+                onClick={() => selectArea(undefined)}
+              >
+                Selected Area: <b>{selectedArea.name}</b>
+              </button>
+            </div>
+          )}
+
           {/* Area Form Dialog for creating and editing areas */}
           <AreaFormDialog />
         </div>

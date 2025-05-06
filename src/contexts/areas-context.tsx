@@ -25,7 +25,6 @@ interface AreasContextType {
   selectedArea: AreaOfInterest | undefined;
   isModalOpen: boolean;
   isEditing: boolean;
-  temporaryGeometry: Feature | undefined;
   showAreas: boolean;
   enableEditInterface: boolean;
 
@@ -37,7 +36,6 @@ interface AreasContextType {
   openEditModal: (id: string | undefined) => void;
   setIsModalOpen: (open: boolean) => void;
   setIsEditing: (editing: boolean) => void;
-  setTemporaryGeometry: (geometry: Feature | undefined) => void;
   getAreasAsGeoJSON: () => FeatureCollection;
   setShowAreas: (show: boolean) => void;
   setEnableEditInterface: (enable: boolean) => void;
@@ -57,9 +55,6 @@ export function AreasProvider({ children }: { children: ReactNode }) {
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [temporaryGeometry, setTemporaryGeometry] = useState<
-    Feature | undefined
-  >(undefined);
 
   // Load areas from local storage
   useEffect(() => {
@@ -98,7 +93,6 @@ export function AreasProvider({ children }: { children: ReactNode }) {
     };
 
     setAreas((prev) => [...prev, newArea]);
-    setTemporaryGeometry(undefined);
   };
 
   // Update an existing area
@@ -144,6 +138,7 @@ export function AreasProvider({ children }: { children: ReactNode }) {
     }
 
     const area = areas.find((a) => a.id === id);
+
     if (area) {
       setSelectedArea(area);
       setIsEditing(true);
@@ -186,7 +181,6 @@ export function AreasProvider({ children }: { children: ReactNode }) {
         selectedArea,
         isModalOpen,
         isEditing,
-        temporaryGeometry,
         showAreas,
         enableEditInterface,
         addArea,
@@ -196,7 +190,6 @@ export function AreasProvider({ children }: { children: ReactNode }) {
         selectArea,
         setIsModalOpen,
         setIsEditing,
-        setTemporaryGeometry,
         getAreasAsGeoJSON,
         setShowAreas,
         setEnableEditInterface,

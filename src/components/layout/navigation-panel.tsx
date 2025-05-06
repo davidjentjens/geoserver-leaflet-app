@@ -55,7 +55,7 @@ const items: SidebarMenuItemProps[] = [
     title: "Analysis",
     icon: Map,
     subItems: [
-      { title: "Maps", url: "/", icon: Map },
+      { title: "Map", url: "/", icon: Map },
       { title: "Layers", url: "/layers", icon: Layers },
     ],
   },
